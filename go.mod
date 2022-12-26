@@ -1,4 +1,4 @@
-module XCPCBoard/utils
+module github.com/XCPCBoard/utils
 
 go 1.18
 
