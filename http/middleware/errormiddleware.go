@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"github.com/XCPCBoard/utils/http/errors"
+	"github.com/XCPCBoard/utils/errors"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -16,19 +16,10 @@ func ErrorHandler() gin.HandlerFunc {
 			err := e.Err
 			// 若是自定义的错误则将code、msg返回
 			if myErr, ok := err.(*errors.MyError); ok {
-				c.JSON(http.StatusOK, gin.H{
-					"code": myErr.Code,
-					"msg":  myErr.Msg,
-					"data": myErr.Data,
-				})
+				c.AbortWithError(http.StatusNotAcceptable, myErr)
 			} else {
 				// 若非自定义错误则返回详细错误信息err.Error()
-				// 比如save session出错时设置的err
-				c.JSON(http.StatusOK, gin.H{
-					"code": 500,
-					"msg":  "服务器异常",
-					"data": err.Error(),
-				})
+				c.AbortWithError(http.StatusNotAcceptable, errors.GetError(errors.INNER_ERROR, err.Error()))
 			}
 			return // 检查一个错误就行
 		}
