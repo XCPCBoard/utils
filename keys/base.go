@@ -42,29 +42,29 @@ const (
 	DifficultyUnknown  = "unknown"
 )
 
-//BuildKeyWithLastSiteKindDifficultyID 时效_网站_类型_难度_用户id
-//难度支持什么类型 取决于 爬虫处理并存了多少信息
+// BuildKeyWithLastSiteKindDifficultyID 时效_网站_类型_难度_用户id
+// 难度支持什么类型 取决于 爬虫处理并存了多少信息
 func BuildKeyWithLastSiteKindDifficultyID(last, site, kind, difficulty, id string) string {
 	return fmt.Sprintf("%v_%v_%v_%v_%v", last, site, kind, difficulty, id)
 }
 
-//BuildKeyWithLastSiteKindID 时效_网站_类型_用户id
-//时效支持几天 取决于 爬虫处理并存了多少信息
+// BuildKeyWithLastSiteKindID 时效_网站_类型_用户id
+// 时效支持几天 取决于 爬虫处理并存了多少信息
 func BuildKeyWithLastSiteKindID(last, site, kind, id string) string {
 	return BuildKeyWithLastSiteKindDifficultyID(last, site, kind, DifficultyUnknown, id)
 }
 
-//BuildKeyWithSiteKindID 网站_类型_用户id
+// BuildKeyWithSiteKindID 网站_类型_用户id
 func BuildKeyWithSiteKindID(site, kind, id string) string {
 	return BuildKeyWithLastSiteKindID(LastAll, site, kind, id)
 }
 
-//BuildKeyWithSiteKind 网站_类型
+// BuildKeyWithSiteKind 网站_类型
 func BuildKeyWithSiteKind(site, kind string) string {
 	return fmt.Sprintf("%v_%v", site, kind)
 }
 
-//BuildKeyWithSiteID 网站_用户id
+// BuildKeyWithSiteID 网站_用户id
 func BuildKeyWithSiteID(site, id string) string {
 	return fmt.Sprintf("%v_%v", site, id)
 }
